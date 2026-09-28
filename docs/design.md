@@ -4,21 +4,13 @@
 
 BoundJury is a GenLayer project for the agentic economy:
 
-Seal plain-English **bounds** for an agent. Anyone submits public HTTPS evidence of an action. Validators fetch the pages and reach comparative consensus on a closed verdict — IN_BOUND, OUT_OF_BOUND, or INCONCLUSIVE. Only OUT_OF_BOUND sets `is_out_of_bound(action_id)`. Integrator contracts refuse privileged actions while the flag is set.
+Seal plain-English **bounds** for an agent. Anyone submits public HTTPS evidence of an action.
+
+Validators fetch the pages and reach comparative consensus on a closed verdict - IN_BOUND, OUT_OF_BOUND, or INCONCLUSIVE. 
+
+Only OUT_OF_BOUND sets `is_out_of_bound(action_id)`. Integrator contracts refuse privileged actions while the flag is set.
 
 BoundJury does not forcibly stop arbitrary agent runtimes. It exposes a consensus-backed bound flag as an integration surface.
-
-## Category
-
-**Projects** (full application path: Intelligent Contract + consumer demo + documentation + live Studionet receipts; UI/demo site as part of the product).
-
-Not a thin one-shot IC demo.
-
-## Track fit
-
-- Agentic commerce: did this action stay inside what the user allowed?
-- Aligns with mandate / delegation judgment without requiring a specific wallet bridge in the core contract
-- GenLayer-native: live HTTPS fetch + comparative consensus on closed labels
 
 ## Adversarial model
 
@@ -45,6 +37,7 @@ ANYONE (while open): challenge(action_id, url)
 AFTER WINDOW: finalize_out(action_id)
 OWNER: owner_clear_out(action_id)  // ops recovery only
 INTEGRATOR: if is_out_of_bound(action_id): revert
+```
 
 ## Verdicts
 
@@ -70,9 +63,11 @@ On an already OUT_OF_BOUND action:
 
 ## Integration
 
+```text
 bj = gl.get_contract_at(boundjury_addr)
 if bj.view().is_out_of_bound(action_id):
     raise  # refuse privileged act
+```
 
 Demo consumer: ExampleBoundAgent - act() / withdraw() gated on the flag.
 
